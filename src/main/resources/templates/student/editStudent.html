@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- Required meta tags -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+<title>Thymeleaf Template</title>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+
+</head>
+<body>
+	<div class="container">
+
+		<div class="card">
+			<div class="card-header">
+				<h3>Chỉnh sửa student</h3>
+			</div>
+			<div class="card-body">
+				<form th:action="@{/account/edit}" method="post"
+					enctype="multipart/form-data" action="#" th:object="${student}">
+					<input th:field="*{id}" type="hidden" />
+					<div class="form-group">
+						<label>Name</label> <input th:field="*{name}" class="form-control"
+							placeholder="Enter name"> <span
+							th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+							class="text-danger help-block"></span>
+					</div>
+
+					<div class="form-group">
+						<label>Email</label> <input th:field="*{email}"
+							class="form-control" placeholder="Enter email"> <span
+							th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+							class="text-danger help-block"></span>
+					</div>
+
+					<div class="form-group">
+						<label>Phone</label> <input th:field="*{phone}"
+							class="form-control" placeholder="Enter phone"> <span
+							th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"
+							class="text-danger help-block"></span>
+					</div>
+
+					<div class="form-group">
+						<label for="exampleFormControlFile1">Upload avatar</label> <input
+							type="file" name="file" class="form-control-file">
+					</div>
+
+					<div class="form-group">
+						<label for="exampleFormControlSelect1">Giới tính</label> <select
+							class="form-control" th:field="*{gender}"
+							id="exampleFormControlSelect1">
+							<option value="">-- Chọn giới tính --</option>
+							<option th:value="Nam">Nam</option>
+							<option th:value="Nữ">Nữ</option>
+						</select>
+					</div>
+
+					<label>Sở thích</label>
+					<th:block th:each="item : ${list}">
+						<div class="form-group form-check">
+							<input name="hobbies" th:value="${item.hobby}" type="checkbox" class="form-check-input" /> 
+							<label class="form-check-label" th:text="${item.hobby}"></label>
+						</div>
+					</th:block>
+
+					<input type="submit" class="btn btn-primary" value="Sửa" />
+				</form>
+			</div>
+			<div class="card-footer text-muted">
+				<a th:href="@{/}">Trang chủ</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+</body>
+</html>
